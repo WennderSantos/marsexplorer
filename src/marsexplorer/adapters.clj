@@ -18,7 +18,7 @@
                0
                {}
                (conj result
-                     (assoc aux :actions
+                     (assoc aux :instructions
 								                (vec
                                   (map #(keyword (str %))
 									 		                 (first settings))))))

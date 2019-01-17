@@ -9,7 +9,7 @@
   (fact "when settings have one explorer configuration"
     (adapters/settings->explorers-config ["5 5"
                                           "1 2 N"
-                                          "LMLMLMLMM"]) => '({:actions [:L :M :L :M :L :M :L :M :M]
+                                          "LMLMLMLMM"]) => '({:instructions [:L :M :L :M :L :M :L :M :M]
                                                               :position {:direction :N
                                                                          :x 1
                                                                          :y 2}}))
@@ -19,12 +19,12 @@
                                           "1 2 N"
                                           "LMLMLMLMM"
                                           "3 3 E"
-                                          "MMRMMRMRRM"]) => '({:actions [:L :M :L :M :L :M :L :M :M]
+                                          "MMRMMRMRRM"]) => '({:instructions [:L :M :L :M :L :M :L :M :M]
                                                                :position {:direction :N
                                                                           :x 1
                                                                           :y 2}}
 
-                                                               {:actions [:M :M :R :M :M :R :M :R :R :M]
+                                                               {:instructions [:M :M :R :M :M :R :M :R :R :M]
                                                                :position {:direction :E
                                                                           :x 3
                                                                           :y 3}})))
