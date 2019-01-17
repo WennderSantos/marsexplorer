@@ -7,7 +7,7 @@
 (defn start-and-execute [settings]
   (->> settings
        (adapters/settings->explorers-config)
-       (map #(logic/execute-actions (:position %)
+       (map #(logic/execute-instructions (:position %)
                                     (:actions %)
                                     specs/directions))
        (map #(vals %))))

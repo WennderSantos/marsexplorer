@@ -18,8 +18,8 @@
        :E #(position-x+1 position)
        :S #(position-y-1 position)
        :N #(position-y+1 position)}
-      ((fn [instructions]
-        ((get-in instructions [(:direction position)]))))))
+      ((fn [movements-by-direction]
+        ((get-in movements-by-direction [(:direction position)]))))))
 
 (defn- turn
   "Returns a cardinal direction. N, E, S, W
@@ -41,14 +41,16 @@
                   (if (= next current-direction) current)))
          (first))))
 
-(defn execute-actions [position actions directions]
-  (if (empty? actions)
+(defn execute-instructions [position instructions directions]
+  (if (empty? instructions)
     position
-    (case (first actions)
-      :M (execute-actions (move position) (rest actions) directions)
-      (:L :R) (execute-actions (assoc position :direction
-                                                  (turn (first actions)
+    (case (first instructions)
+      :M (execute-instructions (move position) (rest instructions) directions)
+      (:L :R) (execute-instructions (assoc position :direction
+                                                  (turn (first instructions)
                                                         directions
                                                         (:direction position)))
-                               (rest actions)
+                               (rest instructions)
                                directions))))
+
+()
