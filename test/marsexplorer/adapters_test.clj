@@ -19,12 +19,12 @@
                                           "1 2 N"
                                           "LMLMLMLMM"
                                           "3 3 E"
-                                          "MMRMMRMRRM"]) => '({:actions [:M :M :R :M :M :R :M :R :R :M]
-                                                               :position {:direction :E
-                                                                          :x 3
-                                                                          :y 3}}
-
-                                                              {:actions [:L :M :L :M :L :M :L :M :M]
+                                          "MMRMMRMRRM"]) => '({:actions [:L :M :L :M :L :M :L :M :M]
                                                                :position {:direction :N
                                                                           :x 1
-                                                                          :y 2}})))
+                                                                          :y 2}}
+
+                                                               {:actions [:M :M :R :M :M :R :M :R :R :M]
+                                                               :position {:direction :E
+                                                                          :x 3
+                                                                          :y 3}})))

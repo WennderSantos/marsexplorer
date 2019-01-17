@@ -1,13 +1,19 @@
 (ns marsexplorer.core
-  (:require [clojure.java.io :as io]
-            [clojure.string :as str]
-            [marsexplorer.adapters :as adapters]))
+  (:require [clojure.string :as str]
+            [marsexplorer.adapters :as adapters]
+            [marsexplorer.specs :as specs]
+            [marsexplorer.logic :as logic]))
 
-(defn start [settings]
-  (let [explorers-config (adapters/settings->explorers-config settings)
-        mars (first settings)]))
+(defn start-and-execute [settings]
+  (->> settings
+       (adapters/settings->explorers-config)
+       (map #(logic/execute-actions (:position %)
+                                    (:actions %)
+                                    specs/directions))
+       (map #(vals %))))
 
 (defn -main
   ([] (println "You need to inform the file path which have the configuration needed to start"))
   ([& args]
-    (start (str (str/split-lines (slurp (first args)))))))
+    (-> (start-and-execute (str/split-lines (slurp (first args))))
+        (println))))

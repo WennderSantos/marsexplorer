@@ -9,7 +9,7 @@
   (loop [settings (rest settings)
          count 0
          aux {}
-         result '()]
+         result []]
     (cond
       (empty? settings) result
       (= count 1) (recur (rest settings)
@@ -17,7 +17,7 @@
                          {}
                          (conj result
                                (assoc aux :actions
-																		 (vec
+																		(vec
 																		 	(map #(keyword (str %))
 																			 		 (first settings))))))
       :else (recur (rest settings)
