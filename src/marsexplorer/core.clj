@@ -13,7 +13,8 @@
        (map #(vals %))))
 
 (defn -main
-  ([] (println "You need to inform the file path which have the configuration needed to start"))
+  ([]
+    (println "Missing file path with the configuration needed to start"))
   ([& args]
     (-> (start-and-execute (str/split-lines (slurp (first args))))
         (println))))

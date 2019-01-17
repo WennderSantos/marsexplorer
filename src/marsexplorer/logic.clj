@@ -26,8 +26,8 @@
   Explorers can turn-left or turn-right and these turns will
   result in a new cardinal direction.
   This function will always look to the left side, to make this possible
-  when the explorer request to turn right, a list of possible cardinal directions
-  will be reverted.
+  when the explorer request to turn right, a list of possible
+  cardinal directions will be reverted.
   Comparisons are always made with the next item. If a match is found,
   it means that the current item is what we are looking for."
   [side-to-turn directions current-direction]
