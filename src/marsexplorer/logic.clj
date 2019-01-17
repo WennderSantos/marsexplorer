@@ -8,7 +8,7 @@
 
 (defn- position-y+1 [position] (update position :y inc))
 
-(defn move
+(defn- move
   "Returns a position.
   Move an explorer based on its position x y and direction.
   The explorer current direction will define which function f
@@ -21,7 +21,7 @@
       ((fn [instructions]
         ((get-in instructions [(:direction position)]))))))
 
-(defn turn
+(defn- turn
   "Returns a cardinal direction. N, E, S, W
   Explorers can turn-left or turn-right and these turns will
   result in a new cardinal direction.
