@@ -28,3 +28,6 @@
                                                                :position {:direction :E
                                                                           :x 3
                                                                           :y 3}})))
+
+(fact "Convert a position into a command line formart"
+	(adapters/position->cmdline-fmt {:x 2 :y 4 :direction :E}) => "2 4 E")

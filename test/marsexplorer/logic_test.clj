@@ -50,6 +50,3 @@
 				(logic/move (assoc position :direction :S)) => {:direction :S :x 1 :y 0})
 		(fact "when facing west"
 				(logic/move (assoc position :direction :W)) => {:direction :W :x 0 :y 1})))
-
-(fact "get-result"
-	(logic/get-result {:x 2 :y 4 :direction :E}) => "2 4 E")

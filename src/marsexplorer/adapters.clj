@@ -29,3 +29,8 @@
                           (string->position (filter #(not= \space %)
 								 									                  (first settings))))
                result))))
+
+(defn position->cmdline-fmt [{:keys [x y direction]}]
+  "Returns the values of a position separated by space"
+  "Ex: {:x 1 :y 2 :direction :N} will return 1 2 N"
+  (str x " " y " " (name direction)))

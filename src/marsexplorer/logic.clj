@@ -43,11 +43,10 @@
          (assoc position :direction))))
 
 (defn validPosition? [position {:keys [bottom-left top-right]}]
+ "Returns true or false"
+ "Check if a position is valid based on mars length"
   (and
     (and (>= (:x position) (:x bottom-left))
          (>= (:y position) (:y bottom-left)))
     (and (<= (:x position) (:x top-right))
          (<= (:y position) (:y top-right)))))
-
-(defn get-result [{:keys [x y direction]}]
-  (str x " " y " " (name direction)))
