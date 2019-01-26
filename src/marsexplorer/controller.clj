@@ -4,7 +4,7 @@
             [marsexplorer.adapters :as adapters]))
 
 (defn- execute [instruction position cardinal-directions]
-  (condp = instruction
+  (case instruction
     :M (logic/move position)
     (logic/turn instruction cardinal-directions position)))
 
