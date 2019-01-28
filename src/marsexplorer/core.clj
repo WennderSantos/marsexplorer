@@ -8,9 +8,12 @@
   ([]
     (println "Missing file path with the configuration needed to start"))
   ([& args]
-    (doall
-      (->> (service/read-file (first args))
-           (adapters/file-content->settings specs/mars-bottom-left-coord)
+  (doall
+    (try
+      (->> (service/read-file! (first args))
+           (adapters/file-content->settings! specs/mars-bottom-left-coord)
            (ctrl/handle-settings specs/cardinal-directions)
-           (map #(println %))))))
-
+           (map #(println %)))
+      (catch Exception e
+        (-> (str "Caught exception: " (.getMessage e))
+            (println)))))))
