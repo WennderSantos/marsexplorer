@@ -1,6 +1,5 @@
 (ns marsexplorer.controller
   (:require [marsexplorer.logic :as logic]
-            [marsexplorer.specs :as specs]
             [marsexplorer.adapters :as adapters]))
 
 (defn- execute [instruction position cardinal-directions]
@@ -8,17 +7,23 @@
     :M (logic/move position)
     (logic/turn instruction position cardinal-directions)))
 
-(defn- handle-instructions [{:keys [position instructions]}]
+(defn- handle-instructions
+  [cardinal-directions mars-length {:keys [position instructions]}]
   (cond
     (empty? instructions)
       (adapters/position->cmdline-fmt position)
-    (logic/validPosition? position {:bottom-left {:x 0 :y 0}
-                                                  :top-right {:x 6 :y 6}})
-      (handle-instructions {:position (execute (first instructions)
+    (logic/validPosition? position mars-length)
+      (handle-instructions cardinal-directions
+                           mars-length
+                           {:position (execute (first instructions)
                                                position
-                                               specs/cardinal-directions)
+                                               cardinal-directions)
                             :instructions (rest instructions)})
     :else (str "Invalid position " (adapters/position->cmdline-fmt position))))
 
-(defn handle-explorers [explorers]
-  (map #(handle-instructions %) explorers))
+(defn handle-settings
+  [cardinal-directions {:keys [mars-length explorers]}]
+  (map #(handle-instructions cardinal-directions
+                             mars-length
+                             %)
+       explorers))

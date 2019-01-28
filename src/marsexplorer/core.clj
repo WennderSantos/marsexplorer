@@ -1,7 +1,7 @@
 (ns marsexplorer.core
-  (:require [clojure.string :as str]
-            [marsexplorer.adapters :as adapters]
+  (:require [marsexplorer.adapters :as adapters]
             [marsexplorer.specs :as specs]
+            [marsexplorer.service :as service]
             [marsexplorer.controller :as ctrl]))
 
 (defn -main
@@ -9,8 +9,8 @@
     (println "Missing file path with the configuration needed to start"))
   ([& args]
     (doall
-      (->> (str/split-lines (slurp (first args)))
-           (adapters/settings->explorers-config)
-           (ctrl/handle-explorers)
+      (->> (service/read-file (first args))
+           (adapters/file-content->settings specs/mars-bottom-left-coord)
+           (ctrl/handle-settings specs/cardinal-directions)
            (map #(println %))))))
 
