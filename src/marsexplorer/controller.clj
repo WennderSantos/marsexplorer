@@ -10,7 +10,7 @@
 (defn- handle-instructions
   [cardinal-directions mars-length {:keys [position instructions]}]
   (cond
-    (seq instructions)
+    (empty? instructions)
       (adapters/position->cmdline-fmt position)
     (logic/validPosition? position mars-length)
       (handle-instructions cardinal-directions

@@ -33,7 +33,8 @@
     (->> (conj cardinal-directions (last cardinal-directions))
          (partition 2 1)
          (keep (fn [[current next]]
-                  (if (= next (:direction position)) current)))
+                  (when (= next (:direction position))
+                    current)))
          (first)
          (assoc position :direction))))
 
