@@ -2,16 +2,18 @@
   (:require [clojure.string :as str]
             [marsexplorer.specs :as specs]))
 
-(defn- line->position! [string]
-	{:x         (Integer/parseInt (str (first string)))
-   :y         (Integer/parseInt (str (second string)))
-	 :direction (keyword (str (last string)))})
+(defn- line->position! [line]
+  (let [line-content (str/split line #" ")]
+    {:x         (Integer/parseInt (first line-content))
+     :y         (Integer/parseInt (second line-content))
+     :direction (keyword (last line-content))}))
 
 (defn- line->mars-length! [line {:keys [x y]}]
-  {:bottom-left {:x x
-                 :y y}
-   :top-right   {:x (Integer/parseInt (str (first line)))
-                 :y (Integer/parseInt (str (last line)))}})
+  (let [line-content (str/split line #" ")]
+    {:bottom-left {:x x
+                   :y y}
+     :top-right   {:x (Integer/parseInt (first line-content))
+                   :y (Integer/parseInt (second line-content))}}))
 
 (defn- lines->explorers! [lines]
   (loop [lines  lines
@@ -34,14 +36,13 @@
         (recur (rest lines)
                (inc count)
                (assoc aux :position
-                          (line->position! (filter #(not= \space %)
-								 									                (first lines))))
+                          (line->position! (first lines)))
                result))))
 
 (defn file-content->settings! [mars-bottom-left-coord file-content]
   (let [lines       (str/split-lines file-content)
         mars-length (line->mars-length! (first lines)
-                                       mars-bottom-left-coord)
+                                        mars-bottom-left-coord)
         explorers   (lines->explorers! (rest lines))]
     {:mars-length mars-length
      :explorers   explorers}))
