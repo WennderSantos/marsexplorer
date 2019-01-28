@@ -6,7 +6,7 @@
 (defn- execute [instruction position cardinal-directions]
   (case instruction
     :M (logic/move position)
-    (logic/turn instruction cardinal-directions position)))
+    (logic/turn instruction position cardinal-directions)))
 
 (defn- handle-instructions [{:keys [position instructions]}]
   (cond

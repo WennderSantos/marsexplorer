@@ -1,5 +1,4 @@
-(ns marsexplorer.specs
-  (:require [clojure.spec.alpha :as s]))
+(ns marsexplorer.specs)
 
 (def cardinal-directions '(:N :E :S :W))
 

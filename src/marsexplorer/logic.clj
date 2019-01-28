@@ -22,19 +22,14 @@
         ((get-in movements-by-direction [(:direction position)]))))))
 
 (defn turn
-  "Returns a cardinal direction. N, E, S, W
-  Explorers can turn-left or turn-right and these turns will
-  result in a new cardinal direction.
-  This function will always look to the left side, to make this possible
-  when the explorer request to turn right, a list of possible
-  cardinal directions will be reverted.
-  Comparisons are always made with the next item. If a match is found,
-  it means that the current item is what we are looking for."
-  [where cardinal-directions position]
+  "Returns a position.
+  Explorers can be instructed to turn left or to turn right using
+  the where parameter with a key :L to turn left or :R to turn right."
+  [where position cardinal-directions]
   (if (= where :R)
-    (turn :L (reverse cardinal-directions) position)
+    (turn :L position (reverse cardinal-directions))
     ;;prepend last item of cardinal-directions '(:W :N :E :S :W)
-    ;;if north is the current direction, turn to the left will result in west
+    ;;if north is the current direction, turn left will result in west
     (->> (conj cardinal-directions (last cardinal-directions))
          (partition 2 1)
          (keep (fn [[current next]]
@@ -43,7 +38,7 @@
          (assoc position :direction))))
 
 (defn validPosition? [position {:keys [bottom-left top-right]}]
- "Returns true or false"
+ "Returns true or false."
  "Check if a position is valid based on mars length"
   (and
     (and (>= (:x position) (:x bottom-left))

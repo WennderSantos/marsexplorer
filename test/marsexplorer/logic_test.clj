@@ -8,37 +8,37 @@
 		(fact "to the left"
 			(fact "when facing north"
 					(logic/turn :L
-											specs/cardinal-directions
-											(assoc position :direction :N)) => (assoc position :direction :W))
+											(assoc position :direction :N)
+											specs/cardinal-directions) => (assoc position :direction :W))
 			(fact "when facing east"
 				(logic/turn :L
-										specs/cardinal-directions
-										(assoc position :direction :E)) => (assoc position :direction :N))
+										(assoc position :direction :E)
+										specs/cardinal-directions) => (assoc position :direction :N))
 			(fact "when facing south"
 				(logic/turn :L
-										specs/cardinal-directions
-										(assoc position :direction :S)) => (assoc position :direction :E))
+										(assoc position :direction :S)
+										specs/cardinal-directions) => (assoc position :direction :E))
 			(fact "when facing west"
 				(logic/turn :L
-										specs/cardinal-directions
-										(assoc position :direction :W)) => (assoc position :direction :S)))
+										(assoc position :direction :W)
+										specs/cardinal-directions) => (assoc position :direction :S)))
 		(fact "to the right"
 			(fact "when facing north"
 				(logic/turn :R
-									  specs/cardinal-directions
-									  (assoc position :direction :N)) => (assoc position :direction :E))
+									  (assoc position :direction :N)
+									  specs/cardinal-directions) => (assoc position :direction :E))
 			(fact "when facing east"
 				(logic/turn :R
-									  specs/cardinal-directions
-									  (assoc position :direction :E)) => (assoc position :direction :S))
+									  (assoc position :direction :E)
+									  specs/cardinal-directions) => (assoc position :direction :S))
 			(fact "when facing south"
 				(logic/turn :R
-									  specs/cardinal-directions
-									  (assoc position :direction :S)) => (assoc position :direction :W))
+									  (assoc position :direction :S)
+									  specs/cardinal-directions) => (assoc position :direction :W))
 			(fact "when facing west"
 				(logic/turn :R
-										specs/cardinal-directions
-										(assoc position :direction :W)) => (assoc position :direction :N)))))
+										(assoc position :direction :W)
+										specs/cardinal-directions) => (assoc position :direction :N)))))
 
 (fact "move"
 	(let [position {:x 1 :y 1}]
