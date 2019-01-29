@@ -4,17 +4,18 @@
             [clojure.spec.alpha :as s]))
 
 (defn- line->position! [line]
-  {:pre [(s/valid? ::specs/position-input line)]}
+  {:pre [(s/assert ::specs/position-input line)]}
     {:x         (Integer/parseInt (first line))
      :y         (Integer/parseInt (second line))
      :direction (keyword (last line))})
 
 (defn- line->instructions! [line]
+  {:pre [(s/assert ::specs/instructions-input line)]}
   (->> (map #(keyword (str %)) line)
        (vec)))
 
 (defn- line->mars-length! [line {:keys [x y]}]
-  {:pre [(s/valid? ::specs/mars-top-rigth-coord line)]}
+  {:pre [(s/assert ::specs/coord-input line)]}
   {:bottom-left {:x x
                  :y y}
    :top-right   {:x (Integer/parseInt (first line))

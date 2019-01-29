@@ -1,6 +1,8 @@
 (ns marsexplorer.specs
   (:require [clojure.spec.alpha :as s]))
 
+(s/check-asserts true)
+
 (defn- isNumber? [s]
   (re-matches #"^[0-9]*$" s))
 
@@ -14,6 +16,8 @@
 
 (def mars-bottom-left-coord {:x 0 :y 0})
 
-(s/def ::mars-top-rigth-coord (s/tuple isNumber? isNumber?))
+(s/def ::coord-input (s/tuple isNumber? isNumber?))
 
 (s/def ::position-input (s/tuple isNumber? isNumber? cardinal-directions?))
+
+(s/def ::instructions-input instructions?)
