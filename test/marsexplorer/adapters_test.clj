@@ -1,11 +1,11 @@
 (ns marsexplorer.adapters-test
   (:require [midje.sweet :refer :all]
             [marsexplorer.adapters :as adapters]
-            [marsexplorer.specs :as specs]))
+            [marsexplorer.config :as config]))
 
 (fact "Parse a file content into a settings map"
   (fact "when file content contains more than 1 explorers config"
-    (adapters/file-content->settings! specs/mars-bottom-left-coord
+    (adapters/file-content->settings! config/mars-bottom-left-coord
                                      (str "5 5\n"
                                           "1 2 N\n"
                                           "LMLM\n"
@@ -29,7 +29,7 @@
                                                      :top-right   {:x 5 :y 5}}})
 
   (fact "when file content contains 1 explorer config"
-    (adapters/file-content->settings! specs/mars-bottom-left-coord
+    (adapters/file-content->settings! config/mars-bottom-left-coord
                                      (str "5 5\n"
                                           "1 2 N\n"
                                           "LMLM\n")) =>
@@ -44,7 +44,7 @@
                                                      :top-right   {:x 5 :y 5}}})
 
   (fact "when explorers config are incompleted, should not create it"
-    (adapters/file-content->settings! specs/mars-bottom-left-coord
+    (adapters/file-content->settings! config/mars-bottom-left-coord
                                      (str "5 5\n"
                                           "LMLM\n")) =>
                                      {:explorers ()
@@ -52,23 +52,23 @@
                                                     :top-right {:x 5 :y 5}}})
 
   (fact "when file content contains invalid data, should throw an exeption"
-    (adapters/file-content->settings! specs/mars-bottom-left-coord
+    (adapters/file-content->settings! config/mars-bottom-left-coord
                                       "") =>
                                       (throws Exception)
 
-    (adapters/file-content->settings! specs/mars-bottom-left-coord
+    (adapters/file-content->settings! config/mars-bottom-left-coord
                                      (str "invalid\n"
                                           "1 2 N\n"
                                           "LRM\n")) =>
                                           (throws Exception)
 
-    (adapters/file-content->settings! specs/mars-bottom-left-coord
+    (adapters/file-content->settings! config/mars-bottom-left-coord
                                      (str "5 5\n"
                                           "invalid\n"
                                           "LRM\n")) =>
                                           (throws Exception)
 
-    (adapters/file-content->settings! specs/mars-bottom-left-coord
+    (adapters/file-content->settings! config/mars-bottom-left-coord
                                      (str "5 5\n"
                                           "1 2 N\n"
                                           "invalid\n")) =>

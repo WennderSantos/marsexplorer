@@ -1,4 +1,4 @@
-(ns marsexplorer.specs
+(ns marsexplorer.config
   (:require [clojure.spec.alpha :as s]))
 
 (s/check-asserts true)
