@@ -1,4 +1,4 @@
 (ns marsexplorer.service)
 
-(defn read-file! [file-path]
+(defn get-file-content! [file-path]
   (slurp file-path))

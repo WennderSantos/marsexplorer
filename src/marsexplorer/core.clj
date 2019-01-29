@@ -10,7 +10,7 @@
   ([& args]
   (doall
     (try
-      (->> (service/read-file! (first args))
+      (->> (service/get-file-content! (first args))
            (adapters/file-content->settings! specs/mars-bottom-left-coord)
            (ctrl/handle-settings specs/cardinal-directions)
            (map #(println %)))
