@@ -2,7 +2,8 @@
   (:require [marsexplorer.adapters :as adapters]
             [marsexplorer.config :as config]
             [marsexplorer.service :as service]
-            [marsexplorer.controller :as ctrl]))
+            [marsexplorer.controller :as ctrl])
+(:gen-class))
 
 (defn -main
   ([]
