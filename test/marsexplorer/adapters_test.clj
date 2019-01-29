@@ -41,7 +41,38 @@
                                                                :x 1
                                                                :y 2}}]
                                        :mars-length {:bottom-left {:x 0 :y 0}
-                                                     :top-right   {:x 5 :y 5}}}))
+                                                     :top-right   {:x 5 :y 5}}})
+
+  (fact "when explorers config are incompleted, should not create it"
+    (adapters/file-content->settings! specs/mars-bottom-left-coord
+                                     (str "5 5\n"
+                                          "LMLM\n")) =>
+                                     {:explorers ()
+                                      :mars-length {:bottom-left {:x 0 :y 0}
+                                                    :top-right {:x 5 :y 5}}})
+
+  (fact "when file content contains invalid data, should throw an exeption"
+    (adapters/file-content->settings! specs/mars-bottom-left-coord
+                                      "") =>
+                                      (throws Exception)
+
+    (adapters/file-content->settings! specs/mars-bottom-left-coord
+                                     (str "invalid\n"
+                                          "1 2 N\n"
+                                          "LRM\n")) =>
+                                          (throws Exception)
+
+    (adapters/file-content->settings! specs/mars-bottom-left-coord
+                                     (str "5 5\n"
+                                          "invalid\n"
+                                          "LRM\n")) =>
+                                          (throws Exception)
+
+    (adapters/file-content->settings! specs/mars-bottom-left-coord
+                                     (str "5 5\n"
+                                          "1 2 N\n"
+                                          "invalid\n")) =>
+                                          (throws Exception)))
 
 (fact "Parse a position into a command line formart"
 	(adapters/position->cmdline-fmt {:x 2 :y 4 :direction :E}) => "2 4 E")
