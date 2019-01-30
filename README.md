@@ -12,13 +12,13 @@ A Clojure program that simulates the creation of explorers and the mars land ava
 * [Other apps](#other-apps)
 
 ## How does it works?
-By reading some data from a text file, the program will create explorers and send instructions of movent to them.
+By reading some data from a text file, the program will create explorers and send instructions of movement to them.
 
 A valid text file should follows this sequence:
 
 * **First line:** Describes top right coordinate of mars land. Must contain two numerical values (>= 0) separeted by space. **Ex: 4 3**
-* **Second line:** Describes an explorer (its position and face direction). Must contains two numerical values (>= 0) separeted by space and a char indicating which direction the explorer is facing (**N** for north, **E** for east, **W** for west and **S** for south). **Ex: 1 2 N**
-* **Third line:** Describes instructions of movement to be send to an explorer. Must contains a string of valid instructions. Valid values are **L** to turn left, **R** to turn right, and **M** to move forward. **Ex: MMLLMRM**
+* **Second line:** Describes an explorer (its position and face direction). Must contain two numerical values (>= 0) separeted by space and a char indicating which direction the explorer is facing (**N** for north, **E** for east, **W** for west and **S** for south). **Ex: 1 2 N**
+* **Third line:** Describes instructions of movement to be send to an explorer. Must contain a string of valid instructions. Valid values are **L** to turn left, **R** to turn right, and **M** to move forward. **Ex: MMLLMRM**
 
 A valid file will looks like the following:
 ```
