@@ -21,4 +21,4 @@
       (str "Invalid position " (adapters/position->cmdline-fmt position))))
 
 (defn handle-settings [{:keys [mars-length explorers]}]
-  (map #(handle-instructions mars-length %)  explorers))
+  (map #(handle-instructions mars-length %) explorers))
