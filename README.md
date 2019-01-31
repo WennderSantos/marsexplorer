@@ -106,6 +106,7 @@ The controller layer is just the "glue" between logic and other layers. The only
 Some things I'd like to improve are:
 * Remove the adapter dependency in controller.
 * Improve error messages for invalid input.
+* Think about transform `turn` into just a constant with a map.
 
 # Business decisions
 I assumed some business definitions by myself. In a team, these definitions should be decided together with team members.
