@@ -1,4 +1,6 @@
-(ns marsexplorer.logic)
+(ns marsexplorer.logic
+  (:require [marsexplorer.config :refer [cardinal-directions-turns]]))
+
 
 (defn- position-x-1 [position] (update position :x dec))
 
@@ -25,18 +27,11 @@
   "Returns a position.
   Explorers can be instructed to turn left or to turn right using
   the where parameter with a key :L to turn left or :R to turn right."
-  [where position cardinal-directions]
-  (if (= where :R)
-    (turn :L position (reverse cardinal-directions))
-    ;;prepend last item of cardinal-directions '(:W :N :E :S :W)
-    ;;if north is the current direction, turn left will result in west
-    (->> (conj cardinal-directions (last cardinal-directions))
-         (partition 2 1)
-         (keep (fn [[current next]]
-                  (when (= next (:direction position))
-                    current)))
-         (first)
-         (assoc position :direction))))
+  [where position]
+  (-> (get cardinal-directions-turns where)
+      (get (:direction position))
+      ((fn [new-direction]
+        (assoc position :direction new-direction)))))
 
 (defn validPosition? [position {:keys [bottom-left top-right]}]
  "Returns true or false."

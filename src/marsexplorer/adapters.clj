@@ -21,11 +21,11 @@
    :top-right   {:x (Integer/parseInt (first line))
                  :y (Integer/parseInt (second line))}})
 
-(defn file-content->settings! [mars-bottom-left-coord file-content]
+(defn file-content->settings! [file-content]
   (let [lines (str/split-lines file-content)]
     {:mars-length (line->mars-length! (-> (first lines)
                                           (str/split #" "))
-                                          mars-bottom-left-coord)
+                                          config/mars-bottom-left-coord)
      :explorers (->> (rest lines)
                      (partition 2)
                      ((fn [lines-config]

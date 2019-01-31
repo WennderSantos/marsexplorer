@@ -9,12 +9,29 @@
 (defn- instructions? [s]
   (re-matches #"^[LRM]+$" s))
 
+(def cardinal-directions-turns
+  {:L {:N :W
+       :E :N
+       :S :E
+       :W :S}
+   :R {:N :E
+       :E :S
+       :S :W
+       :W :N}})
+
+(def ^:private ^:const cardinal-directions
+  (->> (:L cardinal-directions-turns)
+       (keys)
+       (map #(name %))
+       (clojure.string/join)))
+
 (defn- cardinal-directions? [s]
-  (re-matches #"^[SENW]{1}$" s))
+  (as-> (re-pattern (str "^["
+                         cardinal-directions
+                         "]{1}$")) regex
+        (re-matches regex s)))
 
-(def cardinal-directions '(:N :E :S :W))
-
-(def mars-bottom-left-coord {:x 0 :y 0})
+(def ^:const mars-bottom-left-coord {:x 0 :y 0})
 
 (s/def ::coord-input (s/tuple isNumber? isNumber?))
 

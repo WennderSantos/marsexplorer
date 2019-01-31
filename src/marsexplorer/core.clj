@@ -1,6 +1,5 @@
 (ns marsexplorer.core
   (:require [marsexplorer.adapters :as adapters]
-            [marsexplorer.config :as config]
             [marsexplorer.service :as service]
             [marsexplorer.controller :as ctrl])
 (:gen-class))
@@ -11,8 +10,8 @@
   ([& args]
     (try
       (->> (service/get-file-content! (first args))
-           (adapters/file-content->settings! config/mars-bottom-left-coord)
-           (ctrl/handle-settings config/cardinal-directions)
+           (adapters/file-content->settings!)
+           (ctrl/handle-settings)
            (map #(println %))
            (doall))
       (catch Exception e
