@@ -1,27 +1,18 @@
 (ns marsexplorer.logic
   (:require [marsexplorer.config :refer [cardinal-directions-turns]]))
 
-
-(defn- position-x-1 [position] (update position :x dec))
-
-(defn- position-x+1 [position] (update position :x inc))
-
-(defn- position-y-1 [position] (update position :y dec))
-
-(defn- position-y+1 [position] (update position :y inc))
-
 (defn move
   "Returns a position.
   Move an explorer based on its position x y and direction.
   The explorer current direction will define which function f
   will be applied to its x y."
   [position]
-  (-> {:W #(position-x-1 position)
-       :E #(position-x+1 position)
-       :S #(position-y-1 position)
-       :N #(position-y+1 position)}
+  (-> {:W (update position :x dec)
+       :E (update position :x inc)
+       :S (update position :y dec)
+       :N (update position :y inc)}
       ((fn [movements-by-direction]
-        ((get-in movements-by-direction [(:direction position)]))))))
+        (get movements-by-direction (:direction position))))))
 
 (defn turn
   "Returns a position.
