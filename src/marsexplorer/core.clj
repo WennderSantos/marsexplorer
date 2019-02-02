@@ -1,6 +1,5 @@
 (ns marsexplorer.core
   (:require [marsexplorer.adapters :as adapters]
-            [marsexplorer.service :as service]
             [marsexplorer.controller :as ctrl])
 (:gen-class))
 
@@ -9,7 +8,7 @@
     (println "Missing file path with the configuration needed to start"))
   ([& args]
     (try
-      (->> (service/get-file-content! (first args))
+      (->> (slurp (first args))
            (adapters/file-content->settings!)
            (ctrl/handle-settings)
            (map #(println %))
