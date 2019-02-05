@@ -96,7 +96,7 @@ The only lib I use in this project was `midje` for unit tests. All other things 
 
 First thing I did was to decide how I would want the data to come to the business logic functions. Once decided, I started to write test cases and the functions in the logic file itself.
 
-As the input comes from a text file and it is not in an easy pattern, I created an `adapter` layer which has the knowledge to get the content from the input file and convert them into a format the business logic know. The adapter layer is also reponsible to convert a result in a format the caller is expecting.
+As the input comes from a text file and it is not in an easy pattern, I created an `adapter` layer which has the knowledge to get the content from the input file and convert them into a format the business logic know. The adapter layer is also reponsible to convert a position into a format the caller is expecting.
 
 The config file has the initial configuration the program need. Some constants and some specifications using regex which is used by the adapter layer to validate the input data. I am using `Clojure spec` as a tool to validate the integrity of input data.
 
@@ -111,11 +111,11 @@ Some things I'd like to improve are:
 # Business decisions
 I assumed some business definitions by myself. In a team, these definitions should be decided together with team members.
 
-* If an instruction result in an invalid position, the instructions of that explorer will be terminated with a result: Invalid position CURRENT_POSITION
+* If an instruction result in an invalid position, the instructions of that explorer will be terminated with a result: Invalid position CURRENT_POSITION: **Ex: Invalid position -1 3 N**
 
-* In the input data, are considerer be valid explorer data a group of two lines containing the explorer position and its instructions. If any of these data is missing, the program will not create the explorer.
+* Are considered to be valid explorer data: a group of two lines containing the explorer position and its instructions. If any of these data is missing, the program will not create the explorer.
 
-* If the input file contains invalid data, the program will stop with a error messaging indication what happens.
+* If the input file contains invalid data, the program will stop with an error messaging indicating what happens.
 
 # Other apps
 I have two variations of this program. The first one is written in Haskell, you can see it [here](https://github.com/WennderSantos/turtlechallange). The other one is also written in Clojure and expose a web api, you can see it [here](https://github.com/WennderSantos/robotsanddinosaurs).
